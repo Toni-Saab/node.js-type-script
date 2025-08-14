@@ -1,0 +1,25 @@
+### POST - User Registration
+POST http://localhost:3000/register
+Content-Type: application/json
+
+{
+    "email": "testuser@example.com",
+    "password": "secure_password"
+}
+
+### GET - Access Protected Route
+GET http://localhost:3000/protected-route/1
+Content-Type: application/json
+
+### POST - Change Password
+POST http://localhost:3000/change-password
+Content-Type: application/json
+
+{
+    "userId": 1,
+    "newPassword": "new_secure_password"
+}
+
+### GET - Recheck Access
+GET http://localhost:3000/protected-route/1
+Content-Type: application/json
