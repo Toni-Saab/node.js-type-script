@@ -1,0 +1,25 @@
+### 1. POST
+POST http://localhost:3000/books
+Content-Type: application/json
+
+{
+    "title": "The Hobbit",
+    "author": "J.R.R. Tolkien",
+    "year": 1937
+}
+
+### 2. GET
+GET http://localhost:3000/books
+Content-Type: application/json
+
+### 3. PUT
+PUT http://localhost:3000/books/1
+Content-Type: application/json
+
+{
+    "year": 1965
+}
+
+### 4. DELETE
+DELETE http://localhost:3000/books/1
+Content-Type: application/json
