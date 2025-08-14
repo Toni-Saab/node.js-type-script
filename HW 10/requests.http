@@ -1,0 +1,35 @@
+### 1. Login as admin and get JWT token
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "email": "admin@example.com",
+    "password": "password123"
+}
+
+### 2. Update email (requires admin token)
+PUT http://localhost:3000/update-email
+Content-Type: application/json
+Authorization: Bearer <INSERT-ADMIN-TOKEN-HERE>
+
+{
+    "newEmail": "new_admin@example.com"
+}
+
+### 3. Delete account (requires user token)
+DELETE http://localhost:3000/delete-account
+Authorization: Bearer <INSERT-USER-TOKEN-HERE>
+
+### 4. Update role (requires admin token)
+PUT http://localhost:3000/update-role
+Content-Type: application/json
+Authorization: Bearer <INSERT-ADMIN-TOKEN-HERE>
+
+{
+    "id": 2,
+    "newRole": "admin"
+}
+
+### 5. Refresh token
+POST http://localhost:3000/refresh-token
+Authorization: Bearer <INSERT-OLD-TOKEN-HERE>
