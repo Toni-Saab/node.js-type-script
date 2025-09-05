@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat</title>
+  <style>
+    :root {
+      font-size: 16px;
+    }
+
+    body {
+      margin: 0;
+      padding-bottom: 4rem;
+      font-family: sans-serif;
+      background-color: #121212;
+      color: #e0e0e0;
+    }
+
+    #form {
+      background: rgba(18, 18, 18, 0.9);
+      padding: 0.25rem;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      height: 4rem;
+      box-sizing: border-box;
+      backdrop-filter: blur(10px);
+      border-top: 0.0625rem solid #333;
+    }
+
+    #input {
+      border: none;
+      padding: 0 1rem;
+      flex: 1;
+      border-radius: 2rem;
+      margin: 0.5rem;
+      background-color: #333;
+      color: #e0e0e0;
+      font-size: 1.25rem;
+    }
+
+    #input:focus {
+      outline: none;
+    }
+
+    #form > button {
+      background: #4caf50;
+      border: none;
+      padding: 0 1rem;
+      margin: 0.5rem;
+      border-radius: 2rem;
+      color: #fff;
+      font-size: 1.25rem;
+    }
+
+    #messages {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      height: calc(100vh - 4rem);
+      overflow-y: auto;
+    }
+
+    #messages > li {
+      padding: 0.75rem 1rem;
+      font-size: 1.2rem;
+      max-width: 70%;
+      border-radius: 1rem;
+      margin: 0.5rem 1rem;
+      word-wrap: break-word;
+    }
+
+    .user-message {
+      background-color: #444;
+      align-self: flex-end;
+    }
+
+    .bot-message {
+      background-color: #2196f3;
+      align-self: flex-start;
+    }
+  </style>
+</head>
+<body>
+  <ul id="messages"></ul>
+  <form id="form">
+    <input id="input" autocomplete="off" />
+    <button>Send</button>
+  </form>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+    const form = document.getElementById('form');
+    const input = document.getElementById('input');
+    const messages = document.getElementById('messages');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (input.value) {
+        socket.emit('chat message', input.value);
+        input.value = '';
+      }
+    });
+
+    socket.on('chat message', (data) => {
+      const item = document.createElement('li');
+      item.textContent = data.text;
+      item.classList.add(data.user === 'user' ? 'user-message' : 'bot-message');
+      messages.appendChild(item);
+      messages.scrollTop = messages.scrollHeight;
+    });
+  </script>
+</body>
+</html>
