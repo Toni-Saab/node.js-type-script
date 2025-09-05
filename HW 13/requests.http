@@ -1,0 +1,41 @@
+### Create a Publisher
+POST http://localhost:3000/publishers
+Content-Type: application/json
+
+{
+    "name": "Publisher One",
+    "location": "New York"
+}
+
+
+### Create a Magazine
+# Use the ID of the publisher you just created.
+POST http://localhost:3000/magazines
+Content-Type: application/json
+
+{
+    "title": "Science Today",
+    "issueNumber": 12,
+    "publisher": "INSERT_PUBLISHER_ID_HERE"
+}
+
+
+### Create a Tag
+POST http://localhost:3000/tags
+Content-Type: application/json
+
+{
+    "name": "Technology"
+}
+
+
+### Create an Article
+# Use the ID of the tag you just created.
+POST http://localhost:3000/articles
+Content-Type: application/json
+
+{
+    "title": "AI in 2025",
+    "content": "A look into the future of artificial intelligence.",
+    "tags": ["INSERT_TAG_ID_HERE"]
+}
