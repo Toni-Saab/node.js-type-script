@@ -7,10 +7,6 @@ Content-Type: application/json
     "password": "secure_password"
 }
 
-### GET - Access Protected Route
-GET http://localhost:3000/protected-route/1
-Content-Type: application/json
-
 ### POST - Change Password
 POST http://localhost:3000/change-password
 Content-Type: application/json
@@ -20,6 +16,33 @@ Content-Type: application/json
     "newPassword": "new_secure_password"
 }
 
-### GET - Recheck Access
+### GET - Access Protected Route
 GET http://localhost:3000/protected-route/1
 Content-Type: application/json
+
+
+### POST - Change Email
+POST http://localhost:3000/change-email
+Content-Type: application/json
+
+{
+    "userId": 1,
+    "newEmail": "newtestemail@example.com",
+    "currentPassword": "new_secure_password"
+}
+
+
+### GET - Admin Access
+# Проверяем доступ к маршруту администратора.
+GET http://localhost:3000/admin
+Content-Type: application/json
+
+
+### POST - Delete Account
+POST http://localhost:3000/delete-account
+Content-Type: application/json
+
+{
+    "userId": 1,
+    "password": "new_secure_password"
+}
